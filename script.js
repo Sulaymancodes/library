@@ -25,7 +25,7 @@ function addBook(){
     myLibrary.push(newBook);
 }
 
-addBook()
+//addBook()
 
 for(let i = 0; i < myLibrary.length; i++){
     titleText.innerText = myLibrary[i].title;
