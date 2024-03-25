@@ -1,5 +1,13 @@
 *{
     box-sizing: border-box;
+    margin: 0;
+}
+:root{
+    --header-color: #faf9cc;
+    --main-color: #653e1a;
+    --main-border: #b5723f;
+    --footer-color: #f4ed3a;
+    --books-color: #475C4B;
 }
 @font-face {
     font-family: 'Honeybee';
@@ -7,16 +15,68 @@
 }
 
 body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--header-color);
     font-family: 'Honeybee', sans-serif;
 }
-header{
-    padding: 1rem 0;
-    
+header, footer{
+    padding: 1.5rem 0;
+    background-color: var(--header-color);
     justify-content: center;
     display: flex;
     align-items: center;
 }
-img{
+.svg{
     width: 40px;
     height: 40px;
+}
+.icon{
+    width: 100px;
+    height: 100px;
+    
+}
+main{
+    background-color: var(--main-border);
+    border: 10px solid var(--main-color);
+    display: grid;
+    width: 90%;
+    gap: 10px;
+    padding: 1rem 1rem;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.main-item{
+    place-self: center;
+    background-color: var(--main-color);
+    border-radius: 50%;
+}
+.main-item:hover{
+    background-color: #7f5025;
+}
+.main-item,
+.book{
+    padding: 1rem 1rem;
+}
+.book{
+    background-color: var(--books-color);
+    color: #fff;
+    font-size: 1.5rem;
+    box-shadow: 5px 5px #fff;
+}
+button{
+    background-color: #9cf6ac;
+    border: none;
+}
+.book-icon{
+    width: 5rem;
+    height: 5rem;
+}
+footer{
+    border-bottom: none;
+    border-top: 1px solid black;
+    background-color: var(--footer-color);
+    font-weight: bold;
+    margin-top: auto;
 }
