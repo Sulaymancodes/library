@@ -104,7 +104,8 @@ submitButton.addEventListener('click', function(event) {
     const bookFormTitle = bookTitle.value;
     const bookFormAuthor = bookAuthor.value;
     const bookFormPages = bookPages.value;
-    // Loop through the radio buttons to find the checked one
+
+    // Loop through the radio buttons to read and not read
     let selectedStatus;
     const statusOptions = document.getElementsByName('bookReadStatus');
     for (const option of statusOptions) {
