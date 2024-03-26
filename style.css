@@ -65,13 +65,54 @@ main{
     font-size: 1.5rem;
     box-shadow: 5px 5px #fff;
 }
-button{
-    background-color: #9cf6ac;
-    border: none;
-}
 .book-icon{
     width: 5rem;
     height: 5rem;
+}
+.read,
+.not-read,
+.delete-btn,
+.close-btn,
+input[type= "submit"]{
+    background-color: #65f880;
+    border: none;
+    padding: .2rem .5rem;
+    font-family: 'honeybee', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.not-read{
+    background-color: #f86565;  
+}
+.read:hover,
+input[type="submit"]:hover{
+    background-color: #9cf6ac;
+}
+.not-read:hover{
+    background-color: #f69c9c;
+}
+.delete-btn:hover,.close-btn:hover{
+    background-color: #ff0000;
+}
+
+.delete-btn,
+.close-btn{
+    background-color: #d40808;
+    color: #fff;
+}
+dialog{
+    position: fixed;
+    margin: 0 auto;
+    top: 20vh;
+    background-color: #faf9cc;
+    font-weight: bold;
+    padding: 2rem 1rem;
+}
+dialog > h2{
+    text-align: center;
+}
+dialog > hr{
+    border: 1.5px solid black;
 }
 footer{
     border-bottom: none;
