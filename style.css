@@ -84,7 +84,7 @@ input[type= "submit"]{
 .not-read{
     background-color: #f86565;  
 }
-.read:hover,
+.book-read:hover,
 input[type="submit"]:hover{
     background-color: #9cf6ac;
 }

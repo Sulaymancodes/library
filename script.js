@@ -32,9 +32,12 @@ function renderBooks(){
     mainContainer.appendChild(addIconContainer);
 
     // Loop through the library and render each book
-    myLibrary.forEach(book => {
+    myLibrary.forEach((book, index) => {
         const bookContainer = document.createElement('div');
         bookContainer.classList.add('book');
+
+        // Add data attribute to store the index of the book
+        bookContainer.dataset.index = index;
 
         const bookIcon = document.createElement('img');
         bookIcon.classList.add('book-icon');
@@ -62,12 +65,37 @@ function renderBooks(){
         const deleteBtn = document.createElement('button');
         deleteBtn.innerText = "Delete";
         deleteBtn.classList.add('delete-btn');
+
+       
         
+        //removing book from the DOM
+        deleteBtn.addEventListener('click', deleteBook)
+
         bookContainer.append(bookIcon, titleText, authorText, pagesText, readStatusText, deleteBtn);
         mainContainer.appendChild(bookContainer);
+
+        readStatusText.addEventListener('click',() =>{
+            if(readStatusText.innerText === "Read"){
+                readStatusText.innerHTML = "Not Read";
+                readStatusText.classList.remove('book-read')
+                readStatusText.classList.add('not-read');
+            }
+            else if(readStatusText.innerText === "Not Read"){
+                readStatusText.innerHTML = "Read";
+                readStatusText.classList.remove('not-read');
+                readStatusText.classList.add('book-read');
+            }
+        });
     });
+    
 }
 
+function deleteBook(event){
+    const bookContainer = event.target.closest('.book');
+    const index = Number(bookContainer.dataset.index);
+    myLibrary.splice(index, 1);
+    renderBooks()
+}
 //Creating add button
 const addIconContainer = document.createElement('div');
 addIconContainer.classList.add('main-item');
