@@ -1,78 +1,71 @@
 const mainContainer = document.querySelector('main');
-const addingBookForm = document.querySelector('#Add-a-book');
+const addingBookForm = document.querySelector('#Addbook');
 const closeForm = document.querySelector('.close-btn');
 const submitButton = document.querySelector('#submit-btn');
 
-const bookTitle = document.querySelector('#title');
-const bookAuthor = document.querySelector('#author');
-const bookPages = document.querySelector('#pages');
-const bookReadStatus = document.querySelector('input[name="options"]:checked');
+const bookTitleForm = document.querySelector('#title');
+const bookAuthorForm = document.querySelector('#author');
+const bookPagesForm = document.querySelector('#pages');
+const bookReadStatusForm = document.querySelector('input[name="options"]:checked');
 
 const myLibrary = [
     {
         title: "Lord of The Rings",
         author: "John Ronald",
         pages: 242,
-        readStatus: false,
+        readStatus: "false",
     },
     {
         title: "Harry Potter",
         author: "J.K Rowling",
         pages: 164,
-        readStatus: true,
+        readStatus: "true",
     }
 ]
 
-//using for loop to render two books into the DOM
+
+
+//using for loop to render books into the DOM
 function renderBooks(){
-    for(let i = 0; i < myLibrary.length; i++){
+    // Clear existing content
+    mainContainer.innerHTML = '';
+    mainContainer.appendChild(addIconContainer);
+
+    // Loop through the library and render each book
+    myLibrary.forEach(book => {
+        const bookContainer = document.createElement('div');
+        bookContainer.classList.add('book');
+
         const bookIcon = document.createElement('img');
         bookIcon.classList.add('book-icon');
         bookIcon.src = 'svg/book-svgrepo-com.svg';
         bookIcon.alt = 'bookicon';
     
-        const bookContainer = document.createElement('div');
-        bookContainer.classList.add('book');
-    
         const titleText = document.createElement('h2');
-        titleText.innerText = myLibrary[i].title;
+        titleText.innerText = book.title;
         
         const authorText = document.createElement('p');
-        authorText.innerText = myLibrary[i].author;
+        authorText.innerText = book.author;
         
         const pagesText = document.createElement('p');
-        pagesText.innerText = `Pages: ${myLibrary[i].pages}`;
+        pagesText.innerText = `Pages: ${book.pages}`;
         
         const readStatusText = document.createElement('button');
-        if(myLibrary[i].readStatus === true){
-            readStatusText.classList.add('read');
+        if (book.readStatus === "true") {
+            readStatusText.classList.add('book-read');
             readStatusText.innerText = 'Read';
-        }else{
+        } else{
             readStatusText.classList.add('not-read');
-            readStatusText.innerText = "Not Read";
+            readStatusText.innerText = 'Not Read';
         }
-        
         
         const deleteBtn = document.createElement('button');
         deleteBtn.innerText = "Delete";
         deleteBtn.classList.add('delete-btn');
-
-        bookContainer.append(bookIcon, titleText, authorText, pagesText, readStatusText,deleteBtn);
+        
+        bookContainer.append(bookIcon, titleText, authorText, pagesText, readStatusText, deleteBtn);
         mainContainer.appendChild(bookContainer);
-    }
-}
-
-
-function Book(title, author, pages, readStatus){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
-}
-
-function addBook(){
-    const newBook = new Book(title,author,pages,readStatus);
-    myLibrary.push(newBook);
+    });
 }
 
 //Creating add button
@@ -86,6 +79,20 @@ addIcon.alt = 'addicon';
 
 addIconContainer.appendChild(addIcon);
 mainContainer.appendChild(addIconContainer);
+
+function Book(title, author, pages, readStatus){
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.readStatus = readStatus;
+}
+
+function addBook(){
+    const newBook = new Book(title,author,pages,readStatus);
+    myLibrary.push(newBook);
+}
+
+
 
 //show pop up form to add book
 addIconContainer.addEventListener('click', () =>{
@@ -101,13 +108,13 @@ closeForm.addEventListener('click', () =>{
 submitButton.addEventListener('click', function(event) {
     event.preventDefault();
     
-    const bookFormTitle = bookTitle.value;
-    const bookFormAuthor = bookAuthor.value;
-    const bookFormPages = bookPages.value;
+    const bookFormTitle = bookTitleForm.value;
+    const bookFormAuthor = bookAuthorForm.value;
+    const bookFormPages = bookPagesForm.value;
 
     // Loop through the radio buttons to read and not read
     let selectedStatus;
-    const statusOptions = document.getElementsByName('bookReadStatus');
+    const statusOptions = document.getElementsByName('choice');
     for (const option of statusOptions) {
         if (option.checked) {
             selectedStatus = option.value;
@@ -117,6 +124,7 @@ submitButton.addEventListener('click', function(event) {
 
     const newBookForm = new Book(bookFormTitle, bookFormAuthor, bookFormPages, selectedStatus);
     myLibrary.push(newBookForm);
+    renderBooks()
 });
 
 
